@@ -1,19 +1,15 @@
 FROM python:2.7
 ENV PYTHONUNBUFFERED 1
 
-ENV APP_USER myapp
 ENV APP_ROOT /app
 
 WORKDIR /app
-RUN groupadd -r ${APP_USER} \
-    && useradd -r -m \
-    --home-dir ${APP_ROOT} \
-    -s /usr/sbin/nologin \
-    -g ${APP_USER} ${APP_USER}
 
-COPY ./requirements.txt /app/config/requirements.txt
+RUN  apt-get update && apt-get install -y mysql-client && apt-get clean
+
+COPY ./config/requirements.txt /app/config/requirements.txt
+COPY ./config/sql/1-modified_django.sql /app/config/sql/1-modified_django.sql
 RUN pip install -r /app/config/requirements.txt
-USER ${APP_USER}
 COPY . /app
 
 
