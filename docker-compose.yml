@@ -3,7 +3,7 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "8000:8000"
+      - "80:80"
     volumes:
       - .:/app
       - ./config/nginx:/etc/nginx/conf.d
@@ -27,11 +27,11 @@ services:
     build: ./web
     restart: always
     #command: python manage.py runserver 0.0.0.0:8000
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && mysql -udjango -pdjango -h db -P 3306 < /app/config/sql/1-modified_django.sql && gunicorn dashboard.wsgi -b 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && mysql -udjango -pdjango -h db -P 3306 < /app/config/sql/1-modified_django.sql && gunicorn dashboard.wsgi -b 0.0.0.0:80"
     volumes:
       - .:/app/web
       - ./web/static:/static
     expose:
-      - "8000"
+      - "80"
     depends_on:
       - db
