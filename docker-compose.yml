@@ -14,7 +14,7 @@ services:
     build: ./mysql
     container_name: Mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=admin
       - MYSQL_USER=django
