@@ -4,7 +4,7 @@ services:
     image: nginx:latest
     container_name: Nginx
     ports:
-      - "80:80"
+      - "8080:8080"
     volumes:
       - ./config/nginx:/etc/nginx/conf.d
       - ./web/static:/static
@@ -23,7 +23,7 @@ services:
     build: ./web
     container_name : IMF_Mointer
     restart: always
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && mysql -udjango -pdjango -h db -P 3306 < /app/config/sql/1-modified_django.sql && gunicorn dashboard.wsgi -b 0.0.0.0:80"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && mysql -udjango -pdjango -h db -P 3306 < /app/config/sql/1-modified_django.sql && gunicorn dashboard.wsgi -b 0.0.0.0:8080"
     volumes:
       - .:/app/web
       - ./web/static:/static
