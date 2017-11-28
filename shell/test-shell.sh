@@ -17,6 +17,7 @@ do
  echo ${error_message} >> ${log_file}
  sleep 3m
  echo ${recovery_message} >> ${log_file}
+ sleep 2m
 done
 
 
