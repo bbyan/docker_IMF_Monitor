@@ -1,6 +1,13 @@
 django==1.11
-MySQL-python
-zabbix_api
+MySQL-python==1.2.5
+zabbix_api==0.5.3
 ConfigParser
 ast
 gunicorn==19.7.0
+certifi==2018.4.16
+chardet==3.0.4
+idna==2.6
+pytz==2018.4
+requests==2.18.4
+urllib3==1.22
+

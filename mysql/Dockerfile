@@ -1,4 +1,4 @@
-FROM mysql
+FROM mysql:5.6
 
 ENV AUTO_RUN_DIR /docker-entrypoint-initdb.d/
 
