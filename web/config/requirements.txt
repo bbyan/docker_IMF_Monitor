@@ -1,4 +1,4 @@
-django==1.11
+django==1.11.29
 MySQL-python==1.2.5
 zabbix_api==0.5.3
 ConfigParser
