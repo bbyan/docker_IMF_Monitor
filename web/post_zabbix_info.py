@@ -19,8 +19,9 @@ config.read("post_zabbix_info.conf")
 
 fmt = config.get('log', 'format', raw=True)
 dateFmt = config.get('log', 'dateformat', raw=True)
+fileName = config.get('log','filename', raw=True)
 
-logging.basicConfig(level=logging.DEBUG, format=fmt, datefmt=dateFmt)
+logging.basicConfig(level=logging.DEBUG, format=fmt, datefmt=dateFmt,filename=fileName)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dashboard.settings')
 django.setup()
@@ -51,18 +52,18 @@ if __name__ == '__main__':
 
     url = config.get('post', 'url')
     trigger_status_sql = config.get('json', 'query')
+    headers = {"Content-Type": "application/json"}
 
     trigger_status = json.dumps(generate_json(execute_query(trigger_status_sql)), sort_keys=True)
-    logging.info(trigger_status)
+    logging.debug(trigger_status)
 
     # post函数
     try:
-        r = requests.post(url, data=trigger_status, timeout=5,
-                          auth=HTTPBasicAuth(config.get('post', 'user'), config.get('post', 'password')))
+        r = requests.post(url, data=trigger_status, headers=headers)
         if r.status_code != 200:
             raise requests.HTTPError(r.text)
         else:
-            logging.debug('Post Successful')
+            logging.info('Post Successful')
     except requests.ConnectionError:
         logging.debug('Connect Faild')
     except requests.HTTPError:

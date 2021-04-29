@@ -7,6 +7,7 @@ WORKDIR /app
 
 #RUN  apt-get update && apt-get install -y libmysqlclient-dev && apt-get clean
 RUN  apt-get update && apt-get install -y mysql-client && apt-get clean
+RUN  apt-get update && apt-get install -y vim  && apt-get clean
 
 COPY ./config/requirements.txt /app/config/requirements.txt
 COPY ./config/sql/1-modified_django.sql /app/config/sql/1-modified_django.sql
