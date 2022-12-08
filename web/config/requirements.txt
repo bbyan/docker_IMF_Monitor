@@ -4,7 +4,7 @@ zabbix_api==0.5.3
 ConfigParser
 ast
 gunicorn==19.7.0
-certifi==2018.4.16
+certifi==2022.12.7
 chardet==3.0.4
 idna==2.6
 pytz==2018.4
